@@ -17,17 +17,19 @@
 - Page liste des produits
 - Page Produit
 - Page utilisateur
-- Page panier
+- Page panier :
+  - systeme de panier avancers (localstorage si pas connecter sinon BDD)
 - Page de paiement : (bonus Stripe Paypal intégration)
 - Page mes commandes
 - Page de commande
+- Page liste des souhaits
 
 - panel admin :
   - Liste des utilisateurs
   - Liste des produits
   - Produit :
     - CRUD
-    - Bonus statistiques des produits(nombre de vue / ajouts du produit au panier / achat du produit)
+    - Bonus statistiques des produits(nombre de vue / ajouts du produit au panier / achat du produit / nombre de commande / nombre de souhaits)
 
 ## Technos utilisées :
 
@@ -41,3 +43,5 @@
 ## Lien vers les autres projets :
 
 ## Lien Notion :
+
+- https://www.notion.so/0fd11d9c9156465fbed4edec95ab55da?v=c1c57d2145b84ef1a6fbca6747b7a91a
