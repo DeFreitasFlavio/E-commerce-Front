@@ -3,7 +3,7 @@
 ## Membres du groupe :
 
 - Aumenier Bastien
-- Graig Kolo
+- Graig Kolodziejczyk
 - Michel Romain
 - De Freitas Flavio
 
