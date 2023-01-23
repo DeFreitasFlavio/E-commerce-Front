@@ -19,6 +19,8 @@
 - Page utilisateur
 - Page panier
 - Page de paiement : (bonus Stripe Paypal intégration)
+- Page mes commandes
+- Page de commande
 
 - panel admin :
   - Liste des utilisateurs
