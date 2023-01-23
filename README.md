@@ -11,21 +11,21 @@
 
 ## Liste des vues (interface utilisateur) de l'app Web et/ou Mobile :
 
-- Page de Login :
-- Page d'inscription :
-- Page d'accueil :
-- Page liste des produits :
-- Page Produit :
-- Page utilisateur :
-- Page panier :
+- Page de Login
+- Page d'inscription
+- Page d'accueil
+- Page liste des produits
+- Page Produit
+- Page utilisateur
+- Page panier
 - Page de paiement : (bonus Stripe Paypal intégration)
 
 - panel admin :
-- Liste des utilisateurs :
-- Liste des produits :
-- Produit :
-  - CRUD
-  - Bonus statistiques des produits(nombre de vue / ajouts du produit au panier / achat du produit)
+  - Liste des utilisateurs
+  - Liste des produits
+  - Produit :
+    - CRUD
+    - Bonus statistiques des produits(nombre de vue / ajouts du produit au panier / achat du produit)
 
 ## Technos utilisées :
 
