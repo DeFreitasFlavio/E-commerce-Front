@@ -40,7 +40,8 @@
 
 ## Jalons
 
-## Lien vers les autres projets :
+## Lien vers les autres projets : 
+- Back : https://github.com/bastien-aumeunier/back-ecommerce
 
 ## Lien Notion :
 
