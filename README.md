@@ -49,7 +49,13 @@
 - Lundi 20 : Modifications du profils
 
   - Front :
--  
+-  Mardi 7 : 
+-  Lundi 13 :
+-  Lundi 20 :
+-  Lundi 27 :
+-  Lundi 6 :
+-  Lundi 13 :
+-  Lundi 20 :
 
 ## Lien vers les autres projets : 
 - Back : https://github.com/bastien-aumeunier/back-ecommerce
