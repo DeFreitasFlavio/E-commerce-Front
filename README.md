@@ -39,6 +39,17 @@
 - Panel admin : ReactJS
 
 ## Jalons
+  - Back :
+- Mardi 7 : Connexion entre base de donnée est l'api
+- Lundi 13 : Authentification terminé
+- Lundi 20 : Route des produits crée
+- Lundi 27 : Route pour ajouter au panier
+- Lundi 6 : Création des commandes
+- Lundi 13 : gestion des favoris
+- Lundi 20 : Modifications du profils
+
+  - Front :
+-  
 
 ## Lien vers les autres projets : 
 - Back : https://github.com/bastien-aumeunier/back-ecommerce
