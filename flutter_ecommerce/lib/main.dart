@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_ecommerce/screens/home_screen.dart';
+import 'package:flutter_ecommerce/screens/home_screen.dart';
 import 'package:flutter_ecommerce/screens/loader.dart';
 
 void main() {
