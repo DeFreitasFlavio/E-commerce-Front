@@ -13,10 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: Loader(),
-      ),
+    return const MaterialApp(
+      home: Scaffold(
+        body: SafeArea(
+          child: Loader(),
+        ),
+      )
     );
   }
 }
