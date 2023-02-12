@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Text("Home Page"),
           ],
         ),

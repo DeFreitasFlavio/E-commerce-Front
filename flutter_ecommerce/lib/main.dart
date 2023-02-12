@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/screens/home_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_ecommerce/screens/loader.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return const Scaffold(
+      body: SafeArea(
+        child: Loader(),
       ),
-      home: const Loader(),
     );
   }
 }
