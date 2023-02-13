@@ -1,5 +1,3 @@
-/// Authentication class for this sample application.
-/// It shuold be self-explanatory
 class User {
   const User({
     required this.id,

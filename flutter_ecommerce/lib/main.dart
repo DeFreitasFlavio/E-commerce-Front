@@ -7,12 +7,12 @@ import 'utils/state_logger.dart';
 
 void main() {
   runApp(
-    const ProviderScope(observers: [StateLogger()], child: MyAwesomeApp()),
+    const ProviderScope(observers: [StateLogger()], child: App()),
   );
 }
 
-class MyAwesomeApp extends ConsumerWidget {
-  const MyAwesomeApp({Key? key}) : super(key: key);
+class App extends ConsumerWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +23,7 @@ class MyAwesomeApp extends ConsumerWidget {
 
     return MaterialApp.router(
       routerConfig: router,
-      title: 'flutter_riverpod + go_router Demo',
+      title: 'SkateShop',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

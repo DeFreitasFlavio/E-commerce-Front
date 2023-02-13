@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../entities/user.dart';
 
-/// A mock of an Authenticated User
 const _dummyUser = User(
   id: 0,
   displayName: "My Name",
@@ -13,12 +12,9 @@ const _dummyUser = User(
   token: "some-updated-secret-auth-token",
 );
 
-/// This notifier holds and handles the authentication state of the application
 class AuthNotifier extends AutoDisposeAsyncNotifier<User?> {
   late SharedPreferences sharedPreferences;
   static const _sharedPrefsKey = 'token';
-
-  /// Mock of the duration of a network request
 
   @override
   FutureOr<User?> build() async {
@@ -29,8 +25,6 @@ class AuthNotifier extends AutoDisposeAsyncNotifier<User?> {
     return await _loginRecoveryAttempt();
   }
 
-  /// Tries to perform a login with the saved token on the persistant storage.
-  /// If _anything_ goes wrong, deletes the internal token and returns a [User.signedOut].
   Future<User?> _loginRecoveryAttempt() async {
     try {
       final savedToken = sharedPreferences.getString(_sharedPrefsKey);

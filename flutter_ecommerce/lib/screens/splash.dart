@@ -11,9 +11,9 @@ class SplashPage extends StatelessWidget {
       home: Scaffold(
         body: SafeArea(
           child: Column(
-            children: [
+            children: const [
               // Lottie.asset('assets/41256-skateboarding.json'),
-              const Text("splash")
+              Text("splash")
             ],
           ),
         ),

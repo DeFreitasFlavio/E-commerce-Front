@@ -1,3 +1,4 @@
+import 'package:flutter_ecommerce/entities/user.dart';
 import 'package:http/http.dart' as http;
 // import 'package:flutter/material.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -11,6 +12,11 @@ Future<Data> fetchData() async {
   } else {
     throw Exception('Failed to load Data');
   }
+}
+
+User getUser() {
+  return const User(
+      id: 1, displayName: "test", email: "test@mail.com", token: "token");
 }
 
 class Data {

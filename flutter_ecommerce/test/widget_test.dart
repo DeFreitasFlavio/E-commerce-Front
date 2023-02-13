@@ -1,4 +1,3 @@
-
 import 'package:flutter_ecommerce/main.dart';
 import 'package:flutter_ecommerce/state/auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +8,7 @@ void main() {
   testWidgets('startup redirects to home when signed in', (tester) async {
     SharedPreferences.setMockInitialValues({});
     await tester.pumpWidget(
-      const ProviderScope(child: MyAwesomeApp()),
+      const ProviderScope(child: App()),
     );
     expect(find.text('Splash Page'), findsOneWidget);
 
