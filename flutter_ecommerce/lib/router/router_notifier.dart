@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/entities/home_data.dart';
 import 'package:flutter_ecommerce/entities/user.dart';
 import 'package:flutter_ecommerce/entities/user_role.dart';
 import 'package:flutter_ecommerce/screens/admin_page.dart';
@@ -32,18 +33,14 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
   }
 
   String? redirect(BuildContext context, GoRouterState state) {
-    if (this.state.isLoading || this.state.hasError) return null;
-
-    final isSplash = state.location == SplashPage.path;
-
-    if (isSplash) {
-      return isAuth ? HomePage.path : LoginPage.path;
+    switch (state.location) {
+      case SplashPage.path:
+        return isAuth ? HomePage.path : LoginPage.path;
+      case LoginPage.path:
+        return isAuth ? HomePage.path : null;
+      default:
+        return isAuth ? null : SplashPage.path;
     }
-
-    final isLoggingIn = state.location == LoginPage.path;
-    if (isLoggingIn) return isAuth ? HomePage.path : null;
-
-    return isAuth ? null : SplashPage.path;
   }
 
   List<GoRoute> get routes => [
@@ -55,9 +52,12 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
             path: HomePage.path,
             builder: (context, state) {
               User user = getUser();
-              return HomePage(user);
+              HomeData object = HomeData(
+                user: user,
+                isAuth: isAuth,
+              );
+              return HomePage(object);
             },
-            //  => const HomePage(),
             redirect: (context, state) async {
               if (state.location == HomePage.path) return null;
 
@@ -90,6 +90,10 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
           path: LoginPage.path,
           builder: (context, state) => const LoginPage(),
         ),
+        // GoRoute(
+        //   path: UserPage.path,
+        //   builder: (context, state) => const UserPage(),
+        // ),
       ];
 
   @override

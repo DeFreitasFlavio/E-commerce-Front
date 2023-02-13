@@ -1,25 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/entities/user.dart';
+import 'package:flutter_ecommerce/entities/home_data.dart';
 import 'package:flutter_ecommerce/state/auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends ConsumerWidget {
-  const HomePage(this.user, {super.key});
+  const HomePage(this.data, {super.key});
   static const path = '/home';
 
-  final User user;
+  final HomeData data;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: const Text("SkateShop")),
+      appBar: AppBar(
+        title: const Text("SkateShop"),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              onPressed: () => context.go('/home/user'),
+              icon: const Icon(Icons.account_circle, size: 40),
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: Container(
+        decoration: const BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.all(Radius.circular(20))),
+        child: Padding(
+          padding: const EdgeInsets.all(5),
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.add_shopping_cart, size: 40),
+          ),
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text("Home Page"),
-            Text(user.displayName),
+            Text(data.user.displayName),
             ElevatedButton(
               onPressed: () {
                 ref.watch(authNotifierProvider.notifier).logout();
