@@ -1,69 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_ecommerce/screens/home_screen.dart';
-import 'package:flutter_ecommerce/screens/loader.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_ecommerce/utils/html.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env');
-  runApp(const MyApp());
+import 'router/router.dart';
+import 'utils/state_logger.dart';
+
+void main() {
+  runApp(
+    const ProviderScope(observers: [StateLogger()], child: MyAwesomeApp()),
+  );
 }
 
-Future<Data> fetchData() async {
-  final response = await http.get(Uri.parse('https://pokebuildapi.fr/api/v1/pokemon'));
-  if (response.statusCode == 200) {
-    print("coucou");
-  } else {
-    throw Exception('Failed to load Data');
-  }
-}
-
-class Data {
-  final int userId;
-
-  const Data({
-    required this.userId,
-  });
-}
-
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-
-  late Future<Data> futurData;
+class MyAwesomeApp extends ConsumerWidget {
+  const MyAwesomeApp({Key? key}) : super(key: key);
 
   @override
-  void initState() {
-    super.initState();
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: FutureBuilder<Data>(
-              future: fetchData(),
-              builder: (context, snapshot) {
-                if(snapshot.hasData) {
-                  return const HomePage();
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
-                return const Loader();
-              },
-            ),
-          ),
-        ),
-      )
+    ///// tu as la com avec l'api ici
+    final user = fetchData();
+
+    return MaterialApp.router(
+      routerConfig: router,
+      title: 'flutter_riverpod + go_router Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
     );
   }
 }
