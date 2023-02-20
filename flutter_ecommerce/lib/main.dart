@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_ecommerce/screens/loader.dart';
+import 'dart:async';
+
+import 'screens/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,12 +16,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: SafeArea(
-          child: Loader(),
-        ),
-      )
+    return MaterialApp(
+      routes: {
+        '/': (context) => const LottieScreen(),
+        '/homepage': (context) => const HomePage(),
+      },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
