@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/entities/home_data.dart';
+import 'package:flutter_ecommerce/entities/product.dart';
 import 'package:flutter_ecommerce/state/auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +10,7 @@ class HomePage extends ConsumerWidget {
   static const path = '/home';
 
   final HomeData data;
+  final bool needUpdate = true;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,8 +44,13 @@ class HomePage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text("Home Page"),
-            Text(data.user.displayName),
+            ref.watch(productsProvider).when(data: (products) {
+              return Text(products[1].name!);
+            }, loading: () {
+              return const CircularProgressIndicator();
+            }, error: (error, stack) {
+              return Text('$error\n$stack');
+            }),
             ElevatedButton(
               onPressed: () {
                 ref.watch(authNotifierProvider.notifier).logout();

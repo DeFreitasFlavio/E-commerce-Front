@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../entities/user.dart';
 
+const String url = "http://161.97.90.183:8000/";
+
 const _dummyUser = User(
   id: 0,
   displayName: "My Name",
@@ -54,6 +56,10 @@ class AuthNotifier extends AutoDisposeAsyncNotifier<User?> {
         () => _dummyUser,
       );
     });
+    // Future<void> login(String email, String password) async {
+    // http.post(
+    //   Uri.parse('$url/users/login'),
+    // );
   }
 
   /// Mock of a login request performed with a saved token.

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/utils/html.dart';
+import 'package:flutter_ecommerce/utils/http.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'router/router.dart';
@@ -17,9 +17,6 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-
-    ///// tu as la com avec l'api ici
-    final user = fetchData();
 
     return MaterialApp.router(
       routerConfig: router,
