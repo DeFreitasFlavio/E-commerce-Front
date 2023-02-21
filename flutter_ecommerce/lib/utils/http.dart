@@ -1,10 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_ecommerce/entities/product.dart';
-import 'package:flutter_ecommerce/entities/user.dart';
 import 'package:http/http.dart' as http;
-// import 'package:flutter/material.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 const String url = "http://161.97.90.183:8000";
 
@@ -29,11 +26,6 @@ Future<List<Product>> getProducts() async {
   } else {
     throw Exception('ERROR:Failed to get products');
   }
-}
-
-User getUser() {
-  return const User(
-      id: 1, displayName: "test", email: "test@mail.com", token: "token");
 }
 
 class Data {

@@ -1,7 +1,5 @@
 enum UserRole {
   admin,
-  verifiedUser,
-  unverifiedUser,
+  user,
   guest,
-  none;
 }

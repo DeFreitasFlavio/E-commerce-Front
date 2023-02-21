@@ -9,7 +9,7 @@ import '../entities/user_role.dart';
 final permissionsProvider = FutureProvider.autoDispose<UserRole>((ref) async {
   final userId = await ref.watch(authNotifierProvider.future);
 
-  if (userId == null) return UserRole.none;
+  if (userId == null) return UserRole.guest;
 
   return _requestMock();
 });
@@ -22,9 +22,9 @@ UserRole _requestMock() {
   if (random < 0.25) {
     return UserRole.admin;
   } else if (random < 0.5) {
-    return UserRole.verifiedUser;
+    return UserRole.guest;
   } else if (random < 0.75) {
-    return UserRole.unverifiedUser;
+    return UserRole.guest;
   } else {
     return UserRole.guest;
   }

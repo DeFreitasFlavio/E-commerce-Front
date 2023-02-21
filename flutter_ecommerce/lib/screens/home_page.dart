@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/entities/home_data.dart';
 import 'package:flutter_ecommerce/entities/product.dart';
 import 'package:flutter_ecommerce/state/auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends ConsumerWidget {
-  const HomePage(this.data, {super.key});
+  const HomePage({super.key});
   static const path = '/home';
 
-  final HomeData data;
   final bool needUpdate = true;
 
   @override

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_ecommerce/entities/user_role.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,11 +9,12 @@ import '../entities/user.dart';
 const String url = "http://161.97.90.183:8000/";
 
 const _dummyUser = User(
-  id: 0,
-  displayName: "My Name",
-  email: "My Email",
-  token: "some-updated-secret-auth-token",
-);
+    id: "e649c96c-7cd9-4eb2-b126-29a4811c262a",
+    firstname: "test",
+    email: "test@test.com",
+    password: "",
+    role: UserRole.user,
+    token: "");
 
 class AuthNotifier extends AutoDisposeAsyncNotifier<User?> {
   late SharedPreferences sharedPreferences;
@@ -92,7 +94,7 @@ class AuthNotifier extends AutoDisposeAsyncNotifier<User?> {
 
       isAuthenticated
           ? sharedPreferences.remove(_sharedPrefsKey)
-          : sharedPreferences.setString(_sharedPrefsKey, val.token);
+          : sharedPreferences.setString(_sharedPrefsKey, val.token!);
     });
   }
 }

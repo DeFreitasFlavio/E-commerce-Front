@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/entities/home_data.dart';
-import 'package:flutter_ecommerce/entities/product.dart';
-import 'package:flutter_ecommerce/entities/user.dart';
 import 'package:flutter_ecommerce/entities/user_role.dart';
 import 'package:flutter_ecommerce/screens/admin_page.dart';
 import 'package:flutter_ecommerce/screens/guest_page.dart';
@@ -11,7 +8,6 @@ import 'package:flutter_ecommerce/screens/splash.dart';
 import 'package:flutter_ecommerce/screens/user_page.dart';
 import 'package:flutter_ecommerce/state/auth.dart';
 import 'package:flutter_ecommerce/state/permissions.dart';
-import 'package:flutter_ecommerce/utils/http.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 // import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -52,15 +48,7 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
         GoRoute(
             path: HomePage.path,
             builder: (context, state) {
-              User user = getUser();
-
-              List<Product> products = [];
-              HomeData object = HomeData(
-                user: user,
-                isAuth: isAuth,
-                products: products,
-              );
-              return HomePage(object);
+              return const HomePage();
             },
             redirect: (context, state) async {
               if (state.location == HomePage.path) return null;
@@ -85,10 +73,10 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
                 path: UserPage.path,
                 builder: (context, state) => const UserPage(),
               ),
-              GoRoute(
-                path: GuestPage.path,
-                builder: (context, state) => const GuestPage(),
-              )
+              // GoRoute(
+              //   path: ProductPage.path,
+              //   builder: (context, state) => const productPage(),
+              // )
             ]),
         GoRoute(
           path: LoginPage.path,
@@ -121,13 +109,11 @@ extension RedirecttionBasedOnRole on UserRole {
     switch (this) {
       case UserRole.admin:
         return null;
-      case UserRole.verifiedUser:
-      case UserRole.unverifiedUser:
+      case UserRole.user:
         if (location == AdminPage.path) return HomePage.path;
         return null;
       case UserRole.guest:
-      case UserRole.none:
-        if (location != HomePage.path) return HomePage.path;
+        // if (location != HomePage.path || location == ) return HomePage.path;
         return null;
     }
   }
