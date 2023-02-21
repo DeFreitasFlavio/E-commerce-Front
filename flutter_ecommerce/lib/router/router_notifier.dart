@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/entities/user_role.dart';
 import 'package:flutter_ecommerce/screens/admin_page.dart';
-import 'package:flutter_ecommerce/screens/guest_page.dart';
 import 'package:flutter_ecommerce/screens/home_page.dart';
 import 'package:flutter_ecommerce/screens/login.dart';
 import 'package:flutter_ecommerce/screens/splash.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_ecommerce/state/auth.dart';
 import 'package:flutter_ecommerce/state/permissions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-// import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class RouterNotifier extends AutoDisposeAsyncNotifier<void>
     implements Listenable {
