@@ -101,7 +101,7 @@ class HomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ref.watch(productsProvider).when(data: (products) {
-              return Text(products[1].name);
+              return Text();
             }, loading: () {
               return const CircularProgressIndicator();
             }, error: (error, stack) {
