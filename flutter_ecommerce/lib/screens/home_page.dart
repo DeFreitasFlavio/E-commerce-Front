@@ -46,7 +46,12 @@ class HomePage extends ConsumerWidget {
                 ]),
                 actions: <Widget>[
                   TextButton(
-                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    onPressed: () {
+                      ref
+                          .watch(productBasketProvider.notifier)
+                          .removeAllProduct();
+                      Navigator.pop(context, 'Cancel');
+                    },
                     child: const Text('Cancel'),
                   ),
                   TextButton(

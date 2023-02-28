@@ -89,6 +89,10 @@ class ProductBasketNotifier extends StateNotifier<List<Product>> {
         if (product.id != productId) product,
     ];
   }
+
+  void removeAllProduct() {
+    state = [];
+  }
 }
 
 final productBasketProvider =
