@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/entities/product.dart';
 import 'package:flutter_ecommerce/entities/user.dart';
+import 'package:flutter_ecommerce/widgets/basketPopup.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -34,7 +35,27 @@ class HomePage extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.all(5),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () => showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Center(child: Text('Panier')),
+                content: Column(children: const [
+                  Text("data1"),
+                  Text("data2"),
+                  Text("data3"),
+                ]),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            ),
             icon: const Icon(Icons.add_shopping_cart, size: 40),
           ),
         ),

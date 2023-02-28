@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/entities/user.dart';
-import 'package:flutter_ecommerce/entities/user_role.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class UserPage extends ConsumerWidget {
   const UserPage({super.key});
@@ -45,7 +43,7 @@ class UserPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(user.firstname ?? "inconnu"),
-            Text(user.id!),
+            Text(user.id ?? "pas d'id"),
           ],
         ),
       ),

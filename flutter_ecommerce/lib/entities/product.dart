@@ -54,5 +54,5 @@ class Product {
 }
 
 final productsProvider = FutureProvider<List<Product>>((ref) async {
-  return getProducts();
+  return await getProducts();
 });

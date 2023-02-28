@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../entities/user_role.dart';
@@ -14,18 +13,6 @@ final permissionsProvider = FutureProvider.autoDispose<UserRole>((ref) async {
   return _requestMock();
 });
 
-/// Gives a random [UserRole] based on a dice roll.
 UserRole _requestMock() {
-  // mock
-  final random = Random().nextDouble();
-
-  if (random < 0.25) {
-    return UserRole.admin;
-  } else if (random < 0.5) {
-    return UserRole.guest;
-  } else if (random < 0.75) {
-    return UserRole.guest;
-  } else {
-    return UserRole.guest;
-  }
+  return UserRole.user;
 }
