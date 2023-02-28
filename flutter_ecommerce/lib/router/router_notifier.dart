@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/entities/user.dart';
 import 'package:flutter_ecommerce/entities/user_role.dart';
 import 'package:flutter_ecommerce/screens/admin_page.dart';
 import 'package:flutter_ecommerce/screens/home_page.dart';
 import 'package:flutter_ecommerce/screens/login.dart';
 import 'package:flutter_ecommerce/screens/splash.dart';
 import 'package:flutter_ecommerce/screens/user_page.dart';
-import 'package:flutter_ecommerce/state/auth.dart';
 import 'package:flutter_ecommerce/state/permissions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -17,9 +17,8 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
 
   @override
   Future<void> build() async {
-    isAuth = await ref.watch(
-      authNotifierProvider.selectAsync((data) => data != null),
-    );
+    final user = ref.watch(userProvider);
+    isAuth = user.role != UserRole.guest;
 
     ref.listenSelf((_, __) {
       if (state.isLoading) return;
@@ -30,11 +29,19 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
   String? redirect(BuildContext context, GoRouterState state) {
     switch (state.location) {
       case SplashPage.path:
-        return isAuth ? HomePage.path : LoginPage.path;
+        Future.delayed(
+          const Duration(milliseconds: 500),
+          () => true,
+        );
+        return HomePage.path;
+      case HomePage.path:
+        return HomePage.path;
+      case UserPage.path:
+        return isAuth ? UserPage.path : LoginPage.path;
       case LoginPage.path:
-        return isAuth ? HomePage.path : null;
+        return isAuth ? UserPage.path : LoginPage.path;
       default:
-        return isAuth ? null : SplashPage.path;
+        return SplashPage.path;
     }
   }
 
@@ -68,22 +75,18 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
                 builder: (context, state) => const AdminPage(),
               ),
               GoRoute(
-                path: UserPage.path,
+                path: UserPage.relativePath,
                 builder: (context, state) => const UserPage(),
+              ),
+              GoRoute(
+                path: LoginPage.relativePath,
+                builder: (context, state) => const LoginPage(),
               ),
               // GoRoute(
               //   path: ProductPage.path,
               //   builder: (context, state) => const productPage(),
               // )
             ]),
-        GoRoute(
-          path: LoginPage.path,
-          builder: (context, state) => const LoginPage(),
-        ),
-        // GoRoute(
-        //   path: UserPage.path,
-        //   builder: (context, state) => const UserPage(),
-        // ),
       ];
 
   @override

@@ -1,20 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter_ecommerce/entities/product.dart';
+import 'package:flutter_ecommerce/entities/user.dart';
 import 'package:http/http.dart' as http;
 
 const String url = "http://161.97.90.183:8000";
-
-Future<Data> fetchData(String dataUrl) async {
-  final response =
-      await http.get(Uri.parse('https://pokebuildapi.fr/api/v1/pokemon'));
-  if (response.statusCode == 200) {
-    // print("coucou");
-    return const Data(userId: 2);
-  } else {
-    throw Exception('Failed to load Data');
-  }
-}
 
 Future<List<Product>> getProducts() async {
   final response = await http.get(Uri.parse('$url/products'));
@@ -28,10 +18,23 @@ Future<List<Product>> getProducts() async {
   }
 }
 
-class Data {
-  final int userId;
-
-  const Data({
-    required this.userId,
-  });
+Future<String> post({required String route, required Object body}) async {
+  final response = await http.post(
+    Uri.parse(url + route),
+    body: body,
+  );
+  final responseCode = response.statusCode;
+  if (responseCode == 201) {
+    return response.body;
+  } else {
+    throw Exception('ERROR:Failed to post at $route,\n code :$responseCode ');
+  }
 }
+
+// 401 exception
+class UnauthorizedException implements Exception {
+  final String message;
+  const UnauthorizedException(this.message);
+}
+
+const networkRoundTripTime = Duration(milliseconds: 750);

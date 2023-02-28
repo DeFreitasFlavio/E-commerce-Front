@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/state/auth.dart';
+import 'package:flutter_ecommerce/entities/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
-  static const path = '/login';
+  static const relativePath = 'login';
+  static const path = '/home/login';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: null,
+      appBar: AppBar(
+        title: const Text("SkateShop"),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -18,9 +21,9 @@ class LoginPage extends ConsumerWidget {
             const Text("Login Page"),
             ElevatedButton(
               onPressed: () async {
-                ref.watch(authNotifierProvider.notifier).login(
-                      "myEmail",
-                      "myPassword",
+                ref.watch(userProvider.notifier).login(
+                      "test@test.com",
+                      "Password!",
                     );
               },
               child: const Text("Login"),
