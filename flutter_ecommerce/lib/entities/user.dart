@@ -79,8 +79,8 @@ final userProvider = StateNotifierProvider<UserNotifier, User>((ref) {
 class ProductBasketNotifier extends StateNotifier<List<Product>> {
   ProductBasketNotifier() : super([]);
 
-  void addProduct(Product todo) {
-    state = [...state, todo];
+  void addProduct(Product product) {
+    state = [...state, product];
   }
 
   void removeProduct(String productId) {

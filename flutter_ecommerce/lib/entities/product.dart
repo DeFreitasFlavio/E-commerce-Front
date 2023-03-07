@@ -3,27 +3,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Product {
   const Product({
-    this.id,
-    this.name,
-    this.image,
-    this.price,
-    this.brand,
-    this.description,
-    this.stock,
-    this.reduction,
-    this.category,
-    this.size,
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.price,
+    required this.brand,
+    required this.description,
+    required this.stock,
+    required this.reduction,
+    required this.category,
+    required this.size,
   });
-  final String? id;
-  final String? name;
-  final String? image;
-  final String? price;
-  final String? brand;
-  final String? description;
-  final int? stock;
-  final int? reduction;
-  final String? category;
-  final String? size;
+  final String id;
+  final String name;
+  final String image;
+  final String price;
+  final String brand;
+  final String description;
+  final int stock;
+  final int reduction;
+  final String category;
+  final String size;
 
   Product.fromJson(Map json)
       : id = json['id'],
