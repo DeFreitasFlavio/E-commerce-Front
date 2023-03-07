@@ -75,27 +75,3 @@ class UserNotifier extends StateNotifier<User> {
 final userProvider = StateNotifierProvider<UserNotifier, User>((ref) {
   return UserNotifier();
 });
-
-class ProductBasketNotifier extends StateNotifier<List<Product>> {
-  ProductBasketNotifier() : super([]);
-
-  void addProduct(Product product) {
-    state = [...state, product];
-  }
-
-  void removeProduct(String productId) {
-    state = [
-      for (final product in state)
-        if (product.id != productId) product,
-    ];
-  }
-
-  void removeAllProduct() {
-    state = [];
-  }
-}
-
-final productBasketProvider =
-    StateNotifierProvider<ProductBasketNotifier, List<Product>>((ref) {
-  return ProductBasketNotifier();
-});

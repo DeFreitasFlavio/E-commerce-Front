@@ -78,9 +78,8 @@ class HomePage extends ConsumerWidget {
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
-                        ref
-                            .watch(productBasketProvider.notifier)
-                            .removeAllProduct();
+                        ref.watch(productBasketProvider.notifier);
+                        // .removeAllProduct();
                         Navigator.pop(context, 'Cancel');
                       },
                       child: const Text('Cancel'),
@@ -106,29 +105,31 @@ class HomePage extends ConsumerWidget {
                 width: 900,
                 height: 700,
                 child: ListView.builder(
-                    padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
-                    itemCount: products.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        padding: const EdgeInsets.all(5.0),
-                        child: SingleChildScrollView(
-                            child: Column(
-                            children: [
-                              Image.network('${products[index].image}'),
-                              Text('${products[index].name}'),
-                              Text('${products[index].category}'),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
+                  padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
+                  itemCount: products.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      padding: const EdgeInsets.all(5.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Image.network(products[index].image),
+                            Text(products[index].name),
+                            Text(products[index].category),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
                                 MaterialButton(
                                   onPressed: () {
-                                    ref.watch(productBasketProvider.notifier).addProduct(products[index]);
+                                    ref
+                                        .watch(productBasketProvider.notifier)
+                                        .addProduct(products[index]);
                                   },
                                   child: const Text("add to panier"),
-                                  ),
+                                ),
                                 MaterialButton(
                                   onPressed: () {
-                                    context.go('/home/user',{});
+                                    // context.go('/home/user',{});
                                   },
                                   child: const Text("Voir détails"),
                                 ),
