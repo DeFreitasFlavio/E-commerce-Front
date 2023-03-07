@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/entities/product.dart';
 import 'package:flutter_ecommerce/entities/user.dart';
-import 'package:flutter_ecommerce/widgets/basketProductWidget.dart';
+import 'package:flutter_ecommerce/widgets/basket_product_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
