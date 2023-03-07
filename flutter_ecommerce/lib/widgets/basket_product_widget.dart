@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/entities/product.dart';
-import 'package:flutter_ecommerce/utils/image/responsive_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BasketProductWidget extends ConsumerWidget {

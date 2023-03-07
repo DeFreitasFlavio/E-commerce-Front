@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_ecommerce/entities/product.dart';
-import 'package:flutter_ecommerce/entities/user.dart';
 import 'package:http/http.dart' as http;
 
 const String url = "http://161.97.90.183:8000";
