@@ -15,8 +15,6 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final basket = ref.watch(productBasketProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("SkateShop"),
@@ -37,61 +35,32 @@ class HomePage extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.all(5),
           child: IconButton(
-            onPressed: () {
-              ref
-                  .watch(productBasketProvider.notifier)
-                  .addProduct(const Product(
-                    id: "1",
-                    brand: "brand",
-                    name: "name",
-                    description: "description",
-                    category: 'category',
-                    image: 'image',
-                    price: 'price',
-                    size: 'size',
-                    stock: 1,
-                    reduction: 1,
-                  ));
-              ref
-                  .watch(productBasketProvider.notifier)
-                  .addProduct(const Product(
-                    id: "2",
-                    brand: "brand",
-                    name: "name2",
-                    description: "description",
-                    category: 'category',
-                    image: 'image',
-                    price: 'price',
-                    size: 'size',
-                    stock: 1,
-                    reduction: 1,
-                  ));
-
-              showDialog<String>(
+            onPressed: () => showDialog<String>(
                 context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Center(child: Text('Panier')),
-                  content: Column(children: [
-                    for (var product in basket)
-                      BasketProductWidget(product: product)
-                  ]),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        ref.watch(productBasketProvider.notifier);
-                        // .removeAllProduct();
-                        Navigator.pop(context, 'Cancel');
-                      },
-                      child: const Text('Cancel'),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
-                      child: const Text('Payer'),
-                    ),
-                  ],
-                ),
-              );
-            },
+                builder: (BuildContext context) {
+                  final basket = ref.watch(productBasketProvider);
+
+                  return AlertDialog(
+                    title: const Center(child: Text('Panier')),
+                    content: Column(children: [
+                      for (final product in basket)
+                        BasketProductWidget(product: product)
+                    ]),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          ref.watch(productBasketProvider.notifier);
+                          Navigator.pop(context, 'Cancel');
+                        },
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('Payer'),
+                      ),
+                    ],
+                  );
+                }),
             icon: const Icon(Icons.add_shopping_cart, size: 40),
           ),
         ),

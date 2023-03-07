@@ -28,11 +28,15 @@ class ProductBasketNotifier extends StateNotifier<List<Product>> {
     state = [...state, product];
   }
 
-  void removeAllProduct(String productId) {
+  void removeProduct({required String productId}) {
     state = [
       for (final product in state)
         if (product.id != productId) product,
     ];
+  }
+
+  void removeAllProduct() {
+    state = [];
   }
 }
 
