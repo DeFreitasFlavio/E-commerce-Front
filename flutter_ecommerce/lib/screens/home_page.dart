@@ -5,6 +5,9 @@ import 'package:flutter_ecommerce/widgets/basket_product_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:flutter_ecommerce/widgets/header_widget.dart';
+import 'package:lottie/lottie.dart';
+
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
   static const path = '/home';
@@ -17,25 +20,19 @@ class HomePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("SkateShop"),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: IconButton(
-              onPressed: () => context.go('/home/user'),
-              icon: const Icon(Icons.account_circle, size: 40),
-            ),
-          ),
-        ],
+        backgroundColor: Colors.white,
+        elevation: 0.5,
+        leadingWidth: MediaQuery.of(context).size.width,
+        leading: const Header(),
       ),
       floatingActionButton: Container(
-        decoration: const BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+        decoration: BoxDecoration(
+            border: Border.all(width: 2.0, color: const Color(0xFFE0E0E0)),
+            borderRadius: const BorderRadius.all(Radius.circular(20))),
         child: Padding(
           padding: const EdgeInsets.all(5),
-          child: IconButton(
-            onPressed: () {
+          child: GestureDetector(
+            onTap: () {
               ref
                   .watch(productBasketProvider.notifier)
                   .addProduct(const Product(
@@ -91,7 +88,12 @@ class HomePage extends ConsumerWidget {
                 ),
               );
             },
-            icon: const Icon(Icons.add_shopping_cart, size: 40),
+            child: Lottie.network(
+              'https://assets3.lottiefiles.com/packages/lf20_xkraio55.json',
+              height: 40,
+              width: 40,
+              animate: true,
+            ),
           ),
         ),
       ),
@@ -101,7 +103,51 @@ class HomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ref.watch(productsProvider).when(data: (products) {
-              return Text(products[1].name);
+              return Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                                width: 170,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: const Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    Image(
+                                      image:
+                                          NetworkImage(products[index].image),
+                                      width: 70,
+                                    ),
+                                    Text(products[index].name,
+                                        textAlign: TextAlign.center),
+                                  ],
+                                )),
+                          ],
+                        ),
+                      );
+                    },
+                  ));
             }, loading: () {
               return const CircularProgressIndicator();
             }, error: (error, stack) {
@@ -118,4 +164,82 @@ class HomePage extends ConsumerWidget {
       ),
     );
   }
+
+/*   Widget ListSkate = SingleChildScrollView(
+    child: Column(
+        children: pokemons.map((pokemon) {
+      return Row(
+        children: [
+          Container(
+            height: 30,
+            child: const Text('Skateboard'),
+          ),
+        ],
+      );
+    }).toList()),
+    [
+      
+      Container(
+          height: 200,
+          margin: const EdgeInsets.only(left: 10, bottom: 10),
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Container(
+                  width: 170,
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          )),
+      Row(
+        children: [
+          Container(
+            height: 30,
+            child: const Text('LongBoard'),
+          ),
+        ],
+      ),
+      Container(
+          height: 200,
+          margin: const EdgeInsets.only(left: 10, bottom: 10),
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Container(
+                  width: 170,
+                  color: Colors.purple,
+                ),
+              ),
+            ],
+          )),
+      Row(
+        children: [
+          Container(
+            height: 30,
+            child: const Text('LongBoard'),
+          ),
+        ],
+      ),
+      Container(
+          height: 200,
+          margin: const EdgeInsets.only(left: 10, bottom: 10),
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Container(
+                  width: 170,
+                  color: Colors.orange,
+                ),
+              ),
+            ],
+          )),
+    ],
+  ); */
 }

@@ -19,6 +19,7 @@ class App extends ConsumerWidget {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: router,
       title: 'SkateShop',
       theme: ThemeData(
