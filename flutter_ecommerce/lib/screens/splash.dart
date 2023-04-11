@@ -6,12 +6,12 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
           child: Column(
-            children: const [
+            children: [
               // Lottie.asset('assets/41256-skateboarding.json'),
               Text("splash")
             ],

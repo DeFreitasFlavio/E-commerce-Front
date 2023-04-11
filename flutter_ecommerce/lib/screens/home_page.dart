@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/entities/product.dart';
 import 'package:flutter_ecommerce/entities/user.dart';
-import 'package:flutter_ecommerce/widgets/basket_product_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,8 +14,6 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final basket = ref.watch(productBasketProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("SkateShop"),
@@ -31,67 +28,11 @@ class HomePage extends ConsumerWidget {
         ],
       ),
       floatingActionButton: Container(
-        decoration: const BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+        decoration: const BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Padding(
           padding: const EdgeInsets.all(5),
           child: IconButton(
-            onPressed: () {
-              ref
-                  .watch(productBasketProvider.notifier)
-                  .addProduct(const Product(
-                    id: "1",
-                    brand: "brand",
-                    name: "name",
-                    description: "description",
-                    category: 'category',
-                    image: 'image',
-                    price: 'price',
-                    size: 'size',
-                    stock: 1,
-                    reduction: 1,
-                  ));
-              ref
-                  .watch(productBasketProvider.notifier)
-                  .addProduct(const Product(
-                    id: "2",
-                    brand: "brand",
-                    name: "name2",
-                    description: "description",
-                    category: 'category',
-                    image: 'image',
-                    price: 'price',
-                    size: 'size',
-                    stock: 1,
-                    reduction: 1,
-                  ));
-
-              showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Center(child: Text('Panier')),
-                  content: Column(children: [
-                    for (var product in basket)
-                      BasketProductWidget(product: product)
-                  ]),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        ref.watch(productBasketProvider.notifier);
-                        // .removeAllProduct();
-                        Navigator.pop(context, 'Cancel');
-                      },
-                      child: const Text('Cancel'),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
-                      child: const Text('Payer'),
-                    ),
-                  ],
-                ),
-              );
-            },
+            onPressed: () => context.go('/home/basket'),
             icon: const Icon(Icons.add_shopping_cart, size: 40),
           ),
         ),
@@ -123,7 +64,7 @@ class HomePage extends ConsumerWidget {
                                   onPressed: () {
                                     ref
                                         .watch(productBasketProvider.notifier)
-                                        .addProduct(products[index]);
+                                        .addProduct(newProduct: products[index], user: ref.watch(userProvider));
                                   },
                                   child: const Text("add to panier"),
                                 ),

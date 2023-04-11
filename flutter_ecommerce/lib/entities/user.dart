@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_ecommerce/entities/product.dart';
 import 'package:flutter_ecommerce/entities/user_role.dart';
 import 'package:flutter_ecommerce/utils/http.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,27 +9,31 @@ class User {
     this.role = UserRole.guest,
     this.id,
     this.firstname,
+    this.name,
     this.email,
-    this.token,
+    this.jwt,
   });
   final UserRole role;
   final String? id;
   final String? firstname;
+  final String? name;
   final String? email;
-  final String? token;
+  final String? jwt;
 
   User.fromJson(Map json, this.role)
       : id = json['id'],
         firstname = json['firstname'],
+        name = json['name'],
         email = json['email'],
-        token = json['token'];
+        jwt = json['jwt'];
 
   Map toJson() {
     return {
       'id': id,
       'firstname': firstname,
+      'name': name,
       'email': email,
-      'token': token,
+      'jwt': jwt,
     };
   }
 
@@ -38,16 +41,18 @@ class User {
     required UserRole role,
     String? id,
     String? firstname,
+    String? name,
     String? email,
     String? password,
-    String? token,
+    String? jwt,
   }) {
     return User(
       role: role,
       id: id ?? this.id,
       firstname: firstname ?? this.firstname,
+      name: name ?? this.name,
       email: email ?? this.email,
-      token: token ?? this.token,
+      jwt: jwt ?? this.jwt,
     );
   }
 }

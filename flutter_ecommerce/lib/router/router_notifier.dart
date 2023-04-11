@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/entities/user.dart';
 import 'package:flutter_ecommerce/entities/user_role.dart';
 import 'package:flutter_ecommerce/screens/admin_page.dart';
+import 'package:flutter_ecommerce/screens/basket_page.dart';
 import 'package:flutter_ecommerce/screens/home_page.dart';
 import 'package:flutter_ecommerce/screens/login.dart';
 import 'package:flutter_ecommerce/screens/splash.dart';
@@ -10,8 +11,7 @@ import 'package:flutter_ecommerce/state/permissions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class RouterNotifier extends AutoDisposeAsyncNotifier<void>
-    implements Listenable {
+class RouterNotifier extends AutoDisposeAsyncNotifier<void> implements Listenable {
   VoidCallback? routerListener;
   bool isAuth = false;
 
@@ -38,8 +38,10 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
         return HomePage.path;
       case UserPage.path:
         return isAuth ? UserPage.path : LoginPage.path;
+      case BasketPage.path:
+        return isAuth ? BasketPage.path : LoginPage.path;
       case LoginPage.path:
-        return isAuth ? UserPage.path : LoginPage.path;
+        return isAuth ? HomePage.path : LoginPage.path;
       default:
         return SplashPage.path;
     }
@@ -79,6 +81,10 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
                 builder: (context, state) => const UserPage(),
               ),
               GoRoute(
+                path: BasketPage.relativePath,
+                builder: (context, state) => const BasketPage(),
+              ),
+              GoRoute(
                 path: LoginPage.relativePath,
                 builder: (context, state) => const LoginPage(),
               ),
@@ -100,8 +106,7 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
   }
 }
 
-final routerNotifierProvider =
-    AutoDisposeAsyncNotifierProvider<RouterNotifier, void>(() {
+final routerNotifierProvider = AutoDisposeAsyncNotifierProvider<RouterNotifier, void>(() {
   return RouterNotifier();
 });
 

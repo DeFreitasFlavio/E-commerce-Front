@@ -9,18 +9,43 @@ Future<List<Product>> getProducts() async {
   final response = await http.get(Uri.parse('$url/products'));
   if (response.statusCode == 200) {
     Iterable list = json.decode(response.body);
-    List<Product> products =
-        list.map((model) => Product.fromJson(model)).toList();
+    List<Product> products = list.map((model) => Product.fromJson(model)).toList();
     return products;
   } else {
     throw Exception('ERROR:Failed to get products');
   }
 }
 
-Future<String> post({required String route, required Object body}) async {
+Future<List<Product>> getBasket(token) async {
+  final response = await http.get(Uri.parse('$url/carts/my-cart'), headers: {'Authorization': 'Bearer $token'});
+  if (response.statusCode == 200) {
+    Iterable list = json.decode(response.body);
+    List<Product> products = list.map((model) => Product.fromJson(model)).toList();
+    return products;
+  } else {
+    throw Exception('ERROR:Failed to get products');
+  }
+}
+
+Future<String> post({required String route, required Object body, Map<String, String>? headers}) async {
   final response = await http.post(
     Uri.parse(url + route),
     body: body,
+    headers: headers,
+  );
+  final responseCode = response.statusCode;
+  if (responseCode == 302) {
+    return response.body;
+  } else {
+    throw Exception('ERROR:Failed to post at $route,\ncode :$responseCode,\nmessage : ${response.body}');
+  }
+}
+
+Future<String> delete({required String route, required Object body, Map<String, String>? headers}) async {
+  final response = await http.post(
+    Uri.parse(url + route),
+    body: body,
+    headers: headers,
   );
   final responseCode = response.statusCode;
   if (responseCode == 201) {
